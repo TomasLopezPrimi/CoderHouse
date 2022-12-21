@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import {ChevronRightIcon, HamburgerIcon} from '@chakra-ui/icons'
-import { ColorModeSwitcher } from "../ColorModeSwitcher";
+//import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import CartWidget from "./CartWidget";
 
 

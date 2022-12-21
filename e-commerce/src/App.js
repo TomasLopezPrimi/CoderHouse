@@ -9,8 +9,8 @@ import ItemListConteiner from './components/ItemListContainer'
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <Box fontSize="xl">
+    <ChakraProvider>
+      <Box fontSize="xl" textAlign='center'>
         <Navbar />
         <ItemListConteiner greeting={'Saludo'} />
       </Box>

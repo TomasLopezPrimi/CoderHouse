@@ -1,7 +1,7 @@
+import { Text } from "@chakra-ui/react";
+
 export default function ItemListConteiner ({greeting}) {
   return (
-    <div>
-      {greeting}
-    </div>
+    <Text fontSize='xxx-large'>{greeting}</Text>
   )
 }
