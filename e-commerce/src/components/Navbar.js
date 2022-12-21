@@ -15,6 +15,7 @@ import {
 
 import {ChevronRightIcon, HamburgerIcon} from '@chakra-ui/icons'
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
+import CartWidget from "./CartWidget";
 
 
 export default function Navbar(){
@@ -38,10 +39,6 @@ export default function Navbar(){
           <Image src='/logo.png' h='6vw' bg='yellow.400' borderRadius='15px' href='/' />
         </BreadcrumbLink>
         </BreadcrumbItem>
-      {/* <BreadcrumbItem>
-        <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-      </BreadcrumbItem> */}
-
       <BreadcrumbItem>
         <BreadcrumbLink href='/ropahombres'>Ropa Hombres</BreadcrumbLink>
       </BreadcrumbItem>
@@ -72,9 +69,10 @@ export default function Navbar(){
         <MenuItem> <Link href="/ropamujeres">Mujeres</Link></MenuItem>
       </MenuList>
     </Menu>
-    <ButtonGroup alignItems='center'>
-      <Link>Iniciar Sesión</Link>
-      <ColorModeSwitcher />
+    <ButtonGroup alignItems='center' spacing='5'>
+      <CartWidget />
+      <Link fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Link>
+      {/* <ColorModeSwitcher /> */}
     </ButtonGroup>
   </HStack>
   )
