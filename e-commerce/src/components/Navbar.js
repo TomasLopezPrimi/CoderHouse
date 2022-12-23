@@ -10,11 +10,12 @@ import {
   IconButton,
   MenuList,
   MenuItem,
-  Image, 
+  Image,
+  Box, 
 } from "@chakra-ui/react";
 
 import {ChevronRightIcon, HamburgerIcon} from '@chakra-ui/icons'
-//import { ColorModeSwitcher } from "./ColorModeSwitcher";
+import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import CartWidget from "./CartWidget";
 
 
@@ -72,7 +73,9 @@ export default function Navbar(){
     <ButtonGroup alignItems='center' spacing='5'>
       <CartWidget />
       <Link fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Link>
-      {/* <ColorModeSwitcher /> */}
+      <Box display='block' position='absolute' top='1px' right='1vw'  >
+        <ColorModeSwitcher />
+      </Box>
     </ButtonGroup>
   </HStack>
   )
