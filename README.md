@@ -1,4 +1,4 @@
 # CoderHouse
 
 Desafios de CoderHouse...
-e-commerce dentro del curso de React
+e-commerce ficticio dentro del curso de React
