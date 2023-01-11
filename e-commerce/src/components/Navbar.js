@@ -4,16 +4,17 @@ import {
   BreadcrumbLink, 
   BreadcrumbItem,
   ButtonGroup,
-  Link,
   Menu,
   MenuButton,
   IconButton,
   MenuList,
   MenuItem,
   Image,
-  Box, 
+  Box,
+  Button, 
 } from "@chakra-ui/react";
 
+import {Link} from 'react-router-dom'
 import {ChevronRightIcon, HamburgerIcon} from '@chakra-ui/icons'
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import CartWidget from "./CartWidget";
@@ -36,16 +37,16 @@ export default function Navbar(){
       spacing='8px' 
       separator={<ChevronRightIcon color='gray.500' />}>
       <BreadcrumbItem>
-        <BreadcrumbLink href="/">
+        <BreadcrumbLink as={Link} to='/'>
           <Image src='/logo.png' h='6vw' bg='yellow.400' borderRadius='15px' href='/' />
         </BreadcrumbLink>
         </BreadcrumbItem>
       <BreadcrumbItem>
-        <BreadcrumbLink href='/ropahombres'>Ropa Hombres</BreadcrumbLink>
+        <BreadcrumbLink as={Link} to="category/men's%20clothing">Ropa Hombres</BreadcrumbLink>
       </BreadcrumbItem>
 
       <BreadcrumbItem >
-        <BreadcrumbLink href='/ropamujeres'>Ropa Mujeres</BreadcrumbLink>
+        <BreadcrumbLink as={Link} to="/category/women's%20clothing">Ropa Mujeres</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
 
@@ -72,7 +73,7 @@ export default function Navbar(){
     </Menu>
     <ButtonGroup alignItems='center' spacing='5'>
       <CartWidget />
-      <Link fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Link>
+      <Button fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Button>
       <Box display='block' position='absolute' top='1px' right='1vw'  >
         <ColorModeSwitcher />
       </Box>

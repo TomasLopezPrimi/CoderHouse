@@ -7,10 +7,12 @@ import {
   chakra,
   Tooltip,
   Text,
+  Button,
 } from '@chakra-ui/react';
 import { FiShoppingCart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
-function Item({imageURL, name, price}) {
+function Item({imageURL, name, price, id}) {
   return (
     <Flex p={50} marginInline='30px' maxW='450px' h='600px' alignItems="center" justifyContent="center">
       <Box
@@ -51,11 +53,10 @@ function Item({imageURL, name, price}) {
 
           <Flex justifyContent="space-between" alignContent="center" mt='5px'>
             <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              <Box as="span" color={'gray.600'}>
-                $
-              </Box>
+              <Box as="span" color={'gray.600'}>$</Box>
               {price.toFixed(2)}
             </Box>
+            <Button as={Link} to={'/detail/' + id} >Detalle</Button>
           </Flex>
         </Box>
       </Box>

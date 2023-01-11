@@ -1,5 +1,6 @@
-import { Box, Button } from "@chakra-ui/react"
+import { Box, Button, Icon } from "@chakra-ui/react"
 import { useState } from "react"
+import { FiShoppingCart } from 'react-icons/fi';
 
 export default function ItemCount({stock}) {
   const [count, setCount] = useState(0)
@@ -13,11 +14,14 @@ export default function ItemCount({stock}) {
   }
 
   return (
-    <Box>
-      <Button onClick={subCount}>-</Button>
+    <Box textAlign='center' marginInline='auto' >
+      <Button variant='ghost' onClick={subCount}>-</Button>
       {count}
-      <Button onClick={addCount}>+</Button>
-      <Button marginLeft={'10px'}>Agregar al carrito</Button>
+      <Button variant='ghost' onClick={addCount}>+</Button>
+      <Button variant='ghost' marginLeft={'10px'}>
+        Agregar al carrito
+        <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} ml='10px' />
+      </Button>
     </Box>
   )
 }
