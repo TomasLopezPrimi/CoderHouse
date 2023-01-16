@@ -43,9 +43,9 @@ export default function ItemDetail ({product}) {
       <Divider />
 
       {/* Esta parte de la Cart se va a terminar resolviendo en las ultimas clases.. */}
-      
+
       { quantity > 0 ? (
-          <Link>Terminar Compra</Link>
+          <Link>Terminar compra - Cantidad:  {quantity}</Link>
         ) : (
         <CardFooter>
           <ButtonGroup spacing='2'>
