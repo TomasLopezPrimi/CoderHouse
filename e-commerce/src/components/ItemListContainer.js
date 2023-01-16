@@ -12,6 +12,7 @@ export default function ItemListConteiner ({greeting}) {
     const {categoryId} = useParams()
 
     //Llamado a "Fake Store API" y filtrar para setear solamente los productos de ropa
+
     useEffect(() => {
       setLoading(true)
 
@@ -27,6 +28,7 @@ export default function ItemListConteiner ({greeting}) {
         }).finally(() => {
            setLoading(false)
         })
+        
       } else {
         fetch("https://fakestoreapi.com/products/category/" + categoryId)
         .then(response => response.json())

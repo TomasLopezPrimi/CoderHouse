@@ -65,10 +65,10 @@ export default function Navbar(){
       variant='outline' />
       <MenuList >
         <MenuItem>
-          <Link href="/">Primi's</Link>
+          <Link to="/">Primi's</Link>
         </MenuItem>
-        <MenuItem> <Link href="/ropahombres">Hombres</Link></MenuItem>
-        <MenuItem> <Link href="/ropamujeres">Mujeres</Link></MenuItem>
+        <MenuItem> <Link to="category/men's%20clothing">Hombres</Link></MenuItem>
+        <MenuItem> <Link to="/category/women's%20clothing">Mujeres</Link></MenuItem>
       </MenuList>
     </Menu>
     <ButtonGroup alignItems='center' spacing='5'>

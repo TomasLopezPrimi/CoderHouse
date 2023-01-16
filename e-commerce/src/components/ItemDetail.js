@@ -9,11 +9,19 @@ import {
   CardFooter,
   ButtonGroup
  } from "@chakra-ui/react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
  import ItemCount from './ItemCount'
 
 export default function ItemDetail ({product}) {
   const [title, image, description, price] = [product.title, product.image, product.description, product.price]
+
+  const [quantity, setQuantity] = useState(0)
+
+  const handleOnAdd = (qty) => {
+    setQuantity(qty)
+  }
 
   return (
     <Card maxW='sm' maxH='m' marginInline='auto'>
@@ -33,12 +41,20 @@ export default function ItemDetail ({product}) {
         </Stack>
       </CardBody>
       <Divider />
-      <CardFooter>
-        <ButtonGroup spacing='2'>
-          {/* La API no tiene detalle de stock, pongo un default de 10 para todos los productos */}
-          <ItemCount stock={10} />
-        </ButtonGroup>
-      </CardFooter>
+
+      {/* Esta parte de la Cart se va a terminar resolviendo en las ultimas clases.. */}
+      
+      { quantity > 0 ? (
+          <Link>Terminar Compra</Link>
+        ) : (
+        <CardFooter>
+          <ButtonGroup spacing='2'>
+            {/* La API no tiene detalle de stock, pongo un default de 10 para todos los productos */}
+            <ItemCount stock={10} onAdd={handleOnAdd} />
+          </ButtonGroup>
+        </CardFooter>
+        )
+      }
     </Card>
   )
 }
