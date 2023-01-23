@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import ItemList from "./ItemList";
@@ -44,8 +44,7 @@ export default function ItemListConteiner ({greeting}) {
     }, [categoryId])
 
     if(loading) {
-      return <Text fontSize='xxx-large' p={8} textAlign='center' >Cargando...</Text>
-    }
+      return <Spinner h='300px' w='300px' margin='5vw' p='100px'/> }
 
     if(error) {
       return <Text fontSize='xxx-large' p={8} textAlign='center'>Hubo un error, actualice la pagina</Text>

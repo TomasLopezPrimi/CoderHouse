@@ -1,7 +1,13 @@
 import { Text, Box, Icon } from "@chakra-ui/react"
+import { useContext } from "react"
 import {GrCart} from 'react-icons/gr'
+import { CartContext } from "../context/CartContext";
 
-export default function CartWidget () {
+export default function CartWidget ( {totalQuantity} ) {
+
+  const {cart} = useContext(CartContext)
+
+
   return (
     <Box 
       as='button' 
@@ -11,9 +17,10 @@ export default function CartWidget () {
       border='2px' 
       borderColor='gray.400'
       borderRadius='lg'
-      bg='gray.200'  >
+      bg='gray.200'
+      onClick={() => console.log(cart)}  >
       <Icon as={GrCart} marginRight='2' />
-      <Text color='black'>0</Text>
+      <Text color='black'> {totalQuantity} </Text>
     </Box>
   )
 

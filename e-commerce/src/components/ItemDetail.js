@@ -7,24 +7,49 @@ import {
   Text,
   Divider,
   CardFooter,
-  ButtonGroup
+  ButtonGroup,
+  Box,
+  Button,
+  Spinner
  } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
  import ItemCount from './ItemCount'
 
 export default function ItemDetail ({product}) {
-  const [title, image, description, price] = [product.title, product.image, product.description, product.price]
+  const [loading, setLoading] = useState(true)
+  
+  const [id, title, image, description, price] = [product.id, product.title, product.image, product.description, product.price]
 
   const [quantity, setQuantity] = useState(0)
 
-  const handleOnAdd = (qty) => {
-    setQuantity(qty)
+  const { addItem, isInCart, removeItem } = useContext(CartContext)
+
+  const handleOnAdd = (quantity) => {
+    setQuantity(quantity)
+    addItem({id, title, price, quantity})
+  }
+
+  const handleOnRemove = () => {
+    setQuantity(0)
+    removeItem(id)
+  }
+
+  useEffect(() => {
+    if (product.id !== undefined) {
+      setLoading(false)
+      console.log('Pasó de true a false')
+      }
+  }, [product])
+
+  if (loading) {
+    return (<Spinner h='300px' w='300px' margin='5vw' p='100px'/>)
   }
 
   return (
-    <Card maxW='sm' maxH='m' marginInline='auto'>
+    <Card maxW='m' maxH='m' marginInline='auto'>
       <CardBody>
         <Image
           src={image}
@@ -36,7 +61,7 @@ export default function ItemDetail ({product}) {
           <Heading size='md'>{title}</Heading>
           <Text>{description} </Text>
           <Text color='blue.600' fontSize='2xl'>
-            ${price}
+            ${price} - Cantidad seleccionada:  {quantity}
           </Text>
         </Stack>
       </CardBody>
@@ -44,8 +69,11 @@ export default function ItemDetail ({product}) {
 
       {/* Esta parte de la Cart se va a terminar resolviendo en las ultimas clases.. */}
 
-      { quantity > 0 ? (
-          <Link>Terminar compra - Cantidad:  {quantity}</Link>
+      { isInCart(id) ? (
+          <Box textAlign='center' p='10px'>
+            <Button as={Link} to={'/'} m='10px'>Terminar compra</Button>
+            <Button onClick={handleOnRemove} m='10px'> Remover productos </Button>
+          </Box>
         ) : (
         <CardFooter>
           <ButtonGroup spacing='2'>

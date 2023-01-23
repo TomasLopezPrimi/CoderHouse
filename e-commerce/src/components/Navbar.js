@@ -1,3 +1,4 @@
+//Librerias
 import { 
   HStack, 
   Breadcrumb, 
@@ -13,14 +14,21 @@ import {
   Box,
   Button, 
 } from "@chakra-ui/react";
-
 import {Link} from 'react-router-dom'
 import {ChevronRightIcon, HamburgerIcon} from '@chakra-ui/icons'
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
+
+//Components/context
 import CartWidget from "./CartWidget";
+import { CartContext } from "../context/CartContext";
+import { useContext } from "react";
 
 
 export default function Navbar(){
+
+  const {totalQuantity} = useContext(CartContext)
+
+
   return (
   <HStack 
     p='25px' 
@@ -72,7 +80,7 @@ export default function Navbar(){
       </MenuList>
     </Menu>
     <ButtonGroup alignItems='center' spacing='5'>
-      <CartWidget />
+      <CartWidget totalQuantity={totalQuantity} />
       <Button fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Button>
       <Box display='block' position='absolute' top='1px' right='1vw'  >
         <ColorModeSwitcher />
