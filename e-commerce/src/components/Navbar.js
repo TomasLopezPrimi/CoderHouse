@@ -50,11 +50,11 @@ export default function Navbar(){
         </BreadcrumbLink>
         </BreadcrumbItem>
       <BreadcrumbItem>
-        <BreadcrumbLink as={Link} to="category/men's%20clothing">Ropa Hombres</BreadcrumbLink>
+        <BreadcrumbLink as={Link} to="category/men">Ropa Hombres</BreadcrumbLink>
       </BreadcrumbItem>
 
       <BreadcrumbItem >
-        <BreadcrumbLink as={Link} to="/category/women's%20clothing">Ropa Mujeres</BreadcrumbLink>
+        <BreadcrumbLink as={Link} to="/category/women">Ropa Mujeres</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
 
@@ -75,8 +75,8 @@ export default function Navbar(){
         <MenuItem>
           <Link to="/">Primi's</Link>
         </MenuItem>
-        <MenuItem> <Link to="category/men's%20clothing">Hombres</Link></MenuItem>
-        <MenuItem> <Link to="/category/women's%20clothing">Mujeres</Link></MenuItem>
+        <MenuItem> <Link to="category/men">Hombres</Link></MenuItem>
+        <MenuItem> <Link to="/category/women">Mujeres</Link></MenuItem>
       </MenuList>
     </Menu>
     <ButtonGroup alignItems='center' spacing='5'>

@@ -29,7 +29,7 @@ export default function ItemDetail ({product}) {
 
   const handleOnAdd = (quantity) => {
     setQuantity(quantity)
-    addItem({id, title, price, quantity})
+    addItem({id, title, price, quantity, image})
   }
 
   const handleOnRemove = () => {

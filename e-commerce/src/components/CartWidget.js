@@ -1,6 +1,7 @@
 import { Text, Box, Icon } from "@chakra-ui/react"
 import { useContext } from "react"
 import {GrCart} from 'react-icons/gr'
+import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
 export default function CartWidget ( {totalQuantity} ) {
@@ -10,7 +11,8 @@ export default function CartWidget ( {totalQuantity} ) {
 
   return (
     <Box 
-      as='button' 
+      as={Link} 
+      to='/cart'
       display='flex'
       alignItems='center'
       p='5px'

@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
+import { getDocs , collection, query, where} from 'firebase/firestore'
+import { db } from "../services/firebase/firebaseConfig";
+
 
 export default function ItemListConteiner ({greeting}) {
     const [products, setProducts] = useState([])
@@ -11,36 +14,29 @@ export default function ItemListConteiner ({greeting}) {
 
     const {categoryId} = useParams()
 
-    //Llamado a "Fake Store API" y filtrar para setear solamente los productos de ropa
-
     useEffect(() => {
       setLoading(true)
 
-      if(!categoryId) {
-        fetch('https://fakestoreapi.com/products/')
-        .then(response => response.json())
-        .then(json => setProducts(json.filter(prod => 
-          prod.category === "men's clothing" || prod.category === "women's clothing")))
-        .catch(error => {
-           setError(true)
-           toast.error("Problema del servidor")
-           console.log(error)
-        }).finally(() => {
-           setLoading(false)
-        })
+      const collectionRef = categoryId
+        ? query(collection(db, 'products'), where('category', '==', categoryId) )
+        : collection(db, 'products')
+
+      getDocs(collectionRef).then(response => {
+        const productsAdapted = response.docs.map(doc => {
+          const data = doc.data()
+          return {id: doc.id, ...data}
+          })
+
+        setProducts(productsAdapted) 
         
-      } else {
-        fetch("https://fakestoreapi.com/products/category/" + categoryId)
-        .then(response => response.json())
-        .then(json => setProducts(json))
-        .catch(error => {
-           setError(true)
-           toast.error("Problema del servidor")
-           console.log(error)
-        }).finally(() => {
-           setLoading(false)
-        })
-      }
+      }).catch(error => {
+        setError(true)
+        toast.error("Problema del servidor, actualice o vuelva más tarde")
+        console.log(error)
+      }).finally(() => {
+        setLoading(false)
+      })
+
     }, [categoryId])
 
     if(loading) {
