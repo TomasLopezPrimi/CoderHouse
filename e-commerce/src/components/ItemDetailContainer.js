@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-import { getDoc , doc} from "firebase/firestore";
-import { db } from "../services/firebase/firebaseConfig";
 import { toast } from "react-hot-toast";
+import { getProductById } from "../services/firebase/firestore/products";
+import useAsync from "../hooks/useAsync";
+import useTitle from "../hooks/useTitle";
+import { Spinner, Text } from "@chakra-ui/react";
 
 export default function ItemDetailContainer () {
-  const [product, setProduct] = useState([])
+
+  useTitle('Detalle producto', [])
 
   const {productId} = useParams()
 
-  useEffect(() => {
-    const docRef = doc(db, 'products', productId)
+  const getProduct = () => getProductById(productId)
 
-    getDoc(docRef).then(response => {
-      const dataProduct = response.data()
-      const productAdapted = {id: response.id, ...dataProduct}
-      setProduct(productAdapted)
-    }).catch(error => {
-      toast.error("Problema del servidor, actualice o vuelva más tarde")
-      console.log(error)
-    })
-  }, [productId])
+  const { data: product, error, loading } = useAsync(getProduct, [productId])
+
+  if(loading) {
+    return <Spinner h='300px' w='300px' margin='5vw' p='100px'/> }
+
+  if(error) {
+    toast.error('Hubo un error, actualice la pagina')
+    return <Text fontSize='xxx-large' p={8} textAlign='center'>Hubo un error, actualice la pagina</Text>
+  }
 
   return (
     <ItemDetail product={product} />

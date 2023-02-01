@@ -21,19 +21,15 @@ import { CartContext } from "../context/CartContext";
 export default function ItemDetail ({product}) {
   const [loading, setLoading] = useState(true)
   
-  const [id, title, image, description, price] = [product.id, product.title, product.image, product.description, product.price]
-
-  const [quantity, setQuantity] = useState(0)
+  const [id, title, image, description, price, stock] = [product.id, product.title, product.image, product.description, product.price, product.stock]
 
   const { addItem, isInCart, removeItem } = useContext(CartContext)
 
   const handleOnAdd = (quantity) => {
-    setQuantity(quantity)
     addItem({id, title, price, quantity, image})
   }
 
   const handleOnRemove = () => {
-    setQuantity(0)
     removeItem(id)
   }
 
@@ -61,14 +57,11 @@ export default function ItemDetail ({product}) {
           <Heading size='md'>{title}</Heading>
           <Text>{description} </Text>
           <Text color='blue.600' fontSize='2xl'>
-            ${price} - Cantidad seleccionada:  {quantity}
+            ${price} - Stock : {stock}
           </Text>
         </Stack>
       </CardBody>
       <Divider />
-
-      {/* Esta parte de la Cart se va a terminar resolviendo en las ultimas clases.. */}
-
       { isInCart(id) ? (
           <Box textAlign='center' p='10px'>
             <Button as={Link} to={'/'} m='10px'>Terminar compra</Button>
@@ -77,8 +70,7 @@ export default function ItemDetail ({product}) {
         ) : (
         <CardFooter>
           <ButtonGroup spacing='2'>
-            {/* La API no tiene detalle de stock, pongo un default de 10 para todos los productos */}
-            <ItemCount stock={10} onAdd={handleOnAdd} />
+            <ItemCount stock={stock} onAdd={handleOnAdd} />
           </ButtonGroup>
         </CardFooter>
         )
