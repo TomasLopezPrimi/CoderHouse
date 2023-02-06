@@ -4,9 +4,9 @@ import {GrCart} from 'react-icons/gr'
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
-export default function CartWidget ( {totalQuantity} ) {
+export default function CartWidget () {
 
-  const {cart} = useContext(CartContext)
+  const {totalQuantity} = useContext(CartContext)
 
 
   return (
@@ -20,8 +20,7 @@ export default function CartWidget ( {totalQuantity} ) {
       borderColor='gray.400'
       borderRadius='lg'
       bg='gray.200'
-      onClick={() => console.log(cart)}  >
-      {totalQuantity > 0 && <Text fontSize='m' color='black' mr='5px'>Ir al carrito </Text> }
+      >
       <Icon as={GrCart} marginRight='2' />
       <Text color='black'> {totalQuantity} </Text>
     </Box>

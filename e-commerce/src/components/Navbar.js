@@ -11,12 +11,10 @@ import {
   MenuList,
   MenuItem,
   Image,
-  Box,
   Button, 
 } from "@chakra-ui/react";
 import {Link} from 'react-router-dom'
 import {ChevronRightIcon, HamburgerIcon} from '@chakra-ui/icons'
-import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 //Components/context
 import CartWidget from "./CartWidget";
@@ -75,16 +73,14 @@ export default function Navbar(){
         <MenuItem>
           <Link to="/">Primi's</Link>
         </MenuItem>
-        <MenuItem> <Link to="category/men">Hombres</Link></MenuItem>
-        <MenuItem> <Link to="/category/women">Mujeres</Link></MenuItem>
+        <MenuItem> <Link to="category/men">Men</Link></MenuItem>
+        <MenuItem> <Link to="/category/women">Women</Link></MenuItem>
       </MenuList>
     </Menu>
     <ButtonGroup alignItems='center' spacing='5'>
-      <CartWidget totalQuantity={totalQuantity} />
+      { totalQuantity > 0 && (
+        <CartWidget />)}
       <Button fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Button>
-      <Box display='block' position='absolute' top='1px' right='1vw'  >
-        <ColorModeSwitcher />
-      </Box>
     </ButtonGroup>
   </HStack>
   )

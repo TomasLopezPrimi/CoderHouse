@@ -13,7 +13,7 @@ import AppRouter from './routes/AppRouter';
 function App() {
     return (
     <ChakraProvider>
-      <Toaster position="bottom-center" reverseOrder={false}/>
+      <Toaster position="top-center" reverseOrder={false}/>
       <Box>
         <BrowserRouter>
           <CartProvider>

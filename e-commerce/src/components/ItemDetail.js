@@ -10,17 +10,17 @@ import {
   ButtonGroup,
   Box,
   Button,
-  Spinner
  } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
  import ItemCount from './ItemCount'
 
-export default function ItemDetail ({product}) {
-  const [loading, setLoading] = useState(true)
+export default function ItemDetail ({product}) {  
   
+  //Producto:
   const [id, title, image, description, price, stock] = [product.id, product.title, product.image, product.description, product.price, product.stock]
 
   const { addItem, isInCart, removeItem } = useContext(CartContext)
@@ -31,21 +31,12 @@ export default function ItemDetail ({product}) {
 
   const handleOnRemove = () => {
     removeItem(id)
+    toast.success('Se removió el producto del carrito')
   }
 
-  useEffect(() => {
-    if (product.id !== undefined) {
-      setLoading(false)
-      console.log('Pasó de true a false')
-      }
-  }, [product])
-
-  if (loading) {
-    return (<Spinner h='300px' w='300px' margin='5vw' p='100px'/>)
-  }
 
   return (
-    <Card maxW='m' maxH='m' marginInline='auto'>
+    <Card maxW={{base: '80%', md:'90%', lg: '40%'}} maxH='m' marginInline='auto'>
       <CardBody>
         <Image
           src={image}
@@ -64,8 +55,9 @@ export default function ItemDetail ({product}) {
       <Divider />
       { isInCart(id) ? (
           <Box textAlign='center' p='10px'>
-            <Button as={Link} to={'/'} m='10px'>Terminar compra</Button>
-            <Button onClick={handleOnRemove} m='10px'> Remover productos </Button>
+            <Button as={Link} to='/cart' m='10px' colorScheme='green' >Terminar compra</Button>
+            <Button onClick={handleOnRemove} m='10px' colorScheme='red'> Remover/Editar productos </Button>
+            <Button as={Link} to='/' m='10px' colorScheme='yellow'>Seguir Navegando</Button>
           </Box>
         ) : (
         <CardFooter>

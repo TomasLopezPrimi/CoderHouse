@@ -17,7 +17,7 @@ export default function ItemListConteiner ({greeting}) {
 
     const { data: products, error, loading } = useAsync(getProductsByCategory, [categoryId])
 
-    console.log(products)
+  
     if(loading) {
       return <Spinner h='300px' w='300px' margin='5vw' p='100px'/> 
     }

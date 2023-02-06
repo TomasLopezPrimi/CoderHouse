@@ -26,10 +26,8 @@ export const getProductById = (producId) => {
         const docRef = doc(db, 'products', producId)
 
         getDoc(docRef).then(response => {
-            const dataProduct = response.data()
-            const productWithId = {id: response.id, ...dataProduct}
-            const productAdapted = createAdaptedProductFromFirestore(productWithId)
-            resolve (productAdapted)
+            const productAdapted = createAdaptedProductFromFirestore(response)
+            resolve(productAdapted)
         }).catch(error => {
             reject(error)
         })
