@@ -1,6 +1,7 @@
 import {
   Flex,
   Box,
+  Badge,
   Image,
   useColorModeValue,
   Icon,
@@ -11,9 +12,10 @@ import {
 import { FiShoppingCart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-function Item({imageURL, name, price, id}) {
+function Item({imageURL, name, price, id, stock}) {
   return (
     <Flex p={50} marginInline='30px' w='450px' h='640px' alignItems="center" justifyContent="center" >
+      
       <Box
         bg={useColorModeValue('white', 'gray.800')}
         maxW="sm"
@@ -22,6 +24,14 @@ function Item({imageURL, name, price, id}) {
         shadow="lg"
         position="relative"
         h='100%'>
+        <Badge 
+          colorScheme={stock === 0 ? 'red' : 'green'} 
+          display='flex' 
+          position='absolute' 
+          top='0' right='0' 
+          >
+            {stock === 0 ? 'SIN STOCK' : 'CON STOCK'}
+        </Badge>
         <Image
           src={imageURL}
           p='10px'
@@ -30,7 +40,6 @@ function Item({imageURL, name, price, id}) {
           roundedTop="lg"
           borderRadius='20px'
         />
-
         <Box p="6"  >
           <Flex justifyContent="space-between" alignContent="center">
             <Text
@@ -44,7 +53,7 @@ function Item({imageURL, name, price, id}) {
             </Text>
           </Flex>
 
-          <Flex justifyContent="space-between" alignContent="center" mt='5px' marginBottom='auto' >
+          <Flex justifyContent="space-between" alignContent="center" mt='5px' marginBottom='auto' m='15px' >
             <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
               <Box as="span" color={'gray.600'}>$</Box>
               {price.toFixed(2)}

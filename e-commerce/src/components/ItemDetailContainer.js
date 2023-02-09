@@ -1,14 +1,17 @@
+//Libraries
 import { useParams } from "react-router-dom";
-import ItemDetail from "./ItemDetail";
 import { toast } from "react-hot-toast";
+import { Spinner, Text } from "@chakra-ui/react";
+
+//Archivos locales
+import ItemDetail from "./ItemDetail";
 import { getProductById } from "../services/firebase/firestore/products";
 import useAsync from "../hooks/useAsync";
 import useTitle from "../hooks/useTitle";
-import { Spinner, Text } from "@chakra-ui/react";
 
 export default function ItemDetailContainer () {
 
-  useTitle('Detalle producto', [])
+  useTitle('Detalle producto')
 
   const {productId} = useParams()
 

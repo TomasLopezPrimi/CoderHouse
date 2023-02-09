@@ -11,7 +11,7 @@ import {
   MenuList,
   MenuItem,
   Image,
-  Button, 
+  // Button, 
 } from "@chakra-ui/react";
 import {Link} from 'react-router-dom'
 import {ChevronRightIcon, HamburgerIcon} from '@chakra-ui/icons'
@@ -48,11 +48,11 @@ export default function Navbar(){
         </BreadcrumbLink>
         </BreadcrumbItem>
       <BreadcrumbItem>
-        <BreadcrumbLink as={Link} to="category/men">Ropa Hombres</BreadcrumbLink>
+        <BreadcrumbLink as={Link} to="category/men" fontWeight='400' >Ropa Hombres</BreadcrumbLink>
       </BreadcrumbItem>
 
       <BreadcrumbItem >
-        <BreadcrumbLink as={Link} to="/category/women">Ropa Mujeres</BreadcrumbLink>
+        <BreadcrumbLink as={Link} to="/category/women" fontWeight='400'>Ropa Mujeres</BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
 
@@ -80,7 +80,7 @@ export default function Navbar(){
     <ButtonGroup alignItems='center' spacing='5'>
       { totalQuantity > 0 && (
         <CartWidget />)}
-      <Button fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Button>
+      {/* <Button fontStyle='italic' fontSize='2xl' >Iniciar Sesión</Button> */}
     </ButtonGroup>
   </HStack>
   )

@@ -1,7 +1,11 @@
+//Libraries
 import { Box, Heading, Flex, Button, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+
+//Archivos locales
 import { CartContext } from "../context/CartContext";
+import useTitle from "../hooks/useTitle";
 import CartList from "./CartList";
 
 
@@ -9,6 +13,8 @@ import CartList from "./CartList";
 export default function CartContainer() {
 
     const {cart, price, clearCart} = useContext(CartContext)
+
+    useTitle('Carrito')
 
     if (cart.length === 0) {
         return (

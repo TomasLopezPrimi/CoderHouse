@@ -1,6 +1,6 @@
 import { getDocs, collection, query, where, getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
-import { createAdaptedProductFromFirestore } from '../../../components/adapters/productAdapted'
+import { createAdaptedProductFromFirestore } from '../../../adapters/productAdapted'
 
 export const getProducts = (categoryId) => {
     return new Promise((resolve, reject) => {
@@ -15,6 +15,7 @@ export const getProducts = (categoryId) => {
 
             resolve(productsAdapted)
         }).catch(error => {
+            console.error(error)
             reject(error)
         })
     })

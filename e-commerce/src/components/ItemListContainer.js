@@ -1,7 +1,10 @@
+//Libraries
 import { Box, Text, Spinner } from "@chakra-ui/react";
 import { toast } from "react-hot-toast";
-import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
+
+//Archivos locales
+import ItemList from "./ItemList";
 import useTitle from "../hooks/useTitle";
 import { getProducts } from "../services/firebase/firestore/products";
 import useAsync from "../hooks/useAsync";
@@ -9,7 +12,7 @@ import useAsync from "../hooks/useAsync";
 
 export default function ItemListConteiner ({greeting}) {
 
-    useTitle('Productos', [])
+    useTitle('Productos')
 
     const {categoryId} = useParams()
 

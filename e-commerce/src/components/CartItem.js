@@ -15,7 +15,7 @@ const CartItem = ({ name, price, imageURL, id, quantity }) => {
         direction={{ base: 'column', sm: 'row' }}
         overflow='hidden'
         variant='outline'
-        w='60%'
+        w='50%'
       >
         <Image
           boxSize='100%'
@@ -23,15 +23,15 @@ const CartItem = ({ name, price, imageURL, id, quantity }) => {
           src={imageURL}
           alt={name}
         />
-        <Stack spacing='5'>
+        <Stack spacing='5' w='60%'>
           <CardBody>
-            <Heading marginInline='auto' size='sm'>{name}</Heading>
+            <Heading size='sm' textAlign='center'>{name}</Heading>
           </CardBody>
-          <CardFooter display='flex' flexDir='column'>
-            <Text> Precio por unidad: ${price} </Text>
-            <Text> Cantidad de productos seleccionados: {quantity} </Text>
-            <Text> Precio Total: ${quantity * price} </Text>
-            <Button variant='ghost' onClick={handleOnRemove} >Remover Items</Button>
+          <CardFooter display='flex' flexDir='column' gap='5px'>
+            <Text> Precio por unidad: <Text as='b' color='green' >${price}</Text> </Text>
+            <Text> Cantidad: <Text as='b' >{quantity}</Text> </Text>
+            <Text as='i' fontSize='xl' textAlign='center'> Precio Total: <Text as='b' color='green' > ${quantity * price} </Text> </Text>
+            <Button variant='outline' marginTop='20px' colorScheme='red' onClick={handleOnRemove} >Remover Items</Button>
           </CardFooter>
         </Stack>
       </Card>

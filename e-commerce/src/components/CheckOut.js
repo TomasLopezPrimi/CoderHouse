@@ -1,25 +1,35 @@
-import { Box, Button, Heading, Spinner } from "@chakra-ui/react"
+//Libraries
+import { Box, Button, Heading, Spinner, Text } from "@chakra-ui/react"
 import { collection, documentId, getDocs, query, where, writeBatch, addDoc } from "firebase/firestore"
 import { useContext, useState } from "react"
 import { toast } from "react-hot-toast"
+import { Link } from 'react-router-dom'
+import Confetti from 'react-confetti'
+
+//Archivos locales
 import { CartContext } from "../context/CartContext"
 import { db } from "../services/firebase/firebaseConfig"
+import FormOrder from "./FormOrder"
+import useTitle from "../hooks/useTitle"
 
 const CheckOut = () => {
     const [loading, setLoading] = useState(false)
+    const [orderId, setOrderId] = useState('')
+    const { cart, price, clearCart } = useContext(CartContext)
 
-    const { cart, price } = useContext(CartContext)
+    useTitle('Checkout')
 
-    const createOrder = async() => {
+//Función que crea la orden y la almacena en firestore si todos los productos tienen stock
+    const createOrder = async(name, email, phone) => {
         setLoading(true)
 
         try {
             setLoading(true)
             const objOrder = {
                 buyer: {
-                    name: 'Tomas Lopez',
-                    phone: '1234',
-                    email: 'asdasd@asdasd.com'
+                    name,
+                    email,
+                    phone
                 },
                 items: cart,
                 price
@@ -59,8 +69,11 @@ const CheckOut = () => {
                 const orderAdded = await addDoc(orderRef, objOrder)
 
                 const { id } = orderAdded
+                setOrderId(id)
 
-                console.log(id)
+                clearCart()
+
+                console.log('ID: ',id)
             } else {
                 toast.error('Hay productos fuera de stock')
             }
@@ -76,11 +89,26 @@ const CheckOut = () => {
         return (<Spinner h='300px' w='300px' margin='5vw' p='100px'/>)
     }
 
+    if(orderId) {
+        return (
+            <Box textAlign='center'>
+                <Confetti />
+                <Heading lineHeight={1.1} fontWeight={600} p={5}>Gracias por confiar en nosotros !</Heading>
+                <Text p={5} >El Id de su compra es: <Text as='i'>{orderId}</Text></Text>
+                <Button as={Link} to='/' m='30px' colorScheme='yellow'>Volver a la página principal</Button>
+            </Box>
+        )
+    }
+
+    if(cart.length === 0) {
+        return (
+            <Heading p={5} textAlign='center'>No hay productos en el carrito</Heading>
+        )
+    }
+
     return (
-        <Box>
-            <Heading> CheckOut </Heading>
-            <Button onClick={createOrder} > Crear orden</Button>
-        </Box>
+            <FormOrder onGenerate={createOrder} price={price} />
+
     )
 }
 

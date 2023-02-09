@@ -47,8 +47,12 @@ export default function ItemDetail ({product}) {
         <Stack mt='6' spacing='3'>
           <Heading size='md'>{title}</Heading>
           <Text>{description} </Text>
-          <Text color='blue.600' fontSize='2xl'>
-            ${price} - Stock : {stock}
+          <Text color='blue.600' fontSize='2xl' textAlign='center'>
+            {
+              stock > 0 ?
+                 (`${`$ ${price}`} - Stock : ${stock}`)
+                 : ('No hay stock')
+            }
           </Text>
         </Stack>
       </CardBody>
@@ -59,13 +63,16 @@ export default function ItemDetail ({product}) {
             <Button onClick={handleOnRemove} m='10px' colorScheme='red'> Remover/Editar productos </Button>
             <Button as={Link} to='/' m='10px' colorScheme='yellow'>Seguir Navegando</Button>
           </Box>
-        ) : (
-        <CardFooter>
-          <ButtonGroup spacing='2'>
-            <ItemCount stock={stock} onAdd={handleOnAdd} />
-          </ButtonGroup>
-        </CardFooter>
-        )
+        ) :  (
+          <>
+            { stock > 0 && 
+              <CardFooter>
+                <ButtonGroup spacing='2'>
+                  <ItemCount stock={stock} onAdd={handleOnAdd} />
+                </ButtonGroup>
+              </CardFooter>}
+          </>
+        ) 
       }
     </Card>
   )

@@ -10,7 +10,7 @@ export default function ItemCount({initial = 1, stock, onAdd}) {
   }
 
   const subCount = () => {
-    setCount(prev => prev > 0 ? prev - 1 : prev)
+    setCount(prev => prev > 1 ? prev - 1 : prev)
   }
 
   return (
